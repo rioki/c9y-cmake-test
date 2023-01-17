@@ -1,0 +1,7 @@
+{
+  "name": "c9y-cmake-test",
+  "version": "0.1.0",
+  "dependencies": [
+      "c9y"
+  ]
+}

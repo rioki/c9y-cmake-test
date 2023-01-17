@@ -1,0 +1,43 @@
+name: CMake
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        triplet: [x86-windows, x64-windows, x64-linux, x64-macos]
+        include:
+          - triplet: x86-windows
+            system: windows-latest
+          - triplet: x64-windows
+            system: windows-latest
+          - triplet: x64-linux
+            system: ubuntu-latest
+          - triplet: x64-macos
+            system: macos-latest
+    runs-on: ${{ matrix.system }}
+    env:
+      VCPKG_DEFAULT_TRIPLET: ${{ matrix.triplet }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Install CMake
+      uses: lukka/get-cmake@latest
+    - name: Restore from cache and install vcpkg
+      uses: lukka/run-vcpkg@v10
+      with:
+        vcpkgGitCommitId: e51afe4695ebf5e6c6f523dbd3bb518db1970531
+    - name: Build
+      uses: lukka/run-cmake@v10
+      with:
+        configurePreset: 'ninja-test'
+        buildPreset: 'ninja-test'
+        testPreset: 'ninja-test'
