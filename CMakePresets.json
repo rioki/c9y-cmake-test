@@ -23,10 +23,6 @@
         "CMAKE_TOOLCHAIN_FILE": {
           "type": "FILEPATH",
           "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
-        },
-        "ENABLE_UNIT_TESTS": {
-          "type": "BOOL",
-          "value": "ON"
         }
       }
     }

@@ -8,7 +8,7 @@
 // LICENSE.txt for more details.
 
 #include <iostream>
-#include <c9y/c9y.h>
+#include <c9y/coroutine.h>
 
 std::future<int> compute_async() {
     using namespace c9y::co_async;
